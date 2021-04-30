@@ -1,88 +1,75 @@
 package ru.netology.domain;
 
 public class Radio {
-    private String name;
-    private int lastRadioStation = 9;
-    private int initialRadioStation = 0;
     private int currentRadioStation;
-    private int maxVolume = 10;
-    private int minVolume = 0;
     private int volume;
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getCurrentRadioStation() {
         return currentRadioStation;
     }
 
     public void setCurrentRadioStation(int currentRadioStation) {
-        this.currentRadioStation = currentRadioStation;
-    }
-
-    public void changeRadioStation() {
-        if (currentRadioStation > lastRadioStation) {
-            this.currentRadioStation = initialRadioStation;
+        if (currentRadioStation > 9) {
             return;
         }
-        if (currentRadioStation < initialRadioStation) {
-            this.currentRadioStation = lastRadioStation;
+        if (currentRadioStation < 0) {
             return;
         }
         this.currentRadioStation = currentRadioStation;
     }
 
-    public void nextRadioStation() {
-        if (currentRadioStation >= lastRadioStation) {
-            currentRadioStation = initialRadioStation;
+
+    public void changeOnPreviousRadioStation() {
+        if (currentRadioStation == 0) {
+            this.currentRadioStation = 9;
             return;
         }
-        currentRadioStation ++;
+        this.currentRadioStation--;
     }
 
-    public void prevRadioStation() {
-        if (currentRadioStation <= initialRadioStation) {
-            currentRadioStation = lastRadioStation;
+
+    public void changeOnNextRadioStation() {
+        if (currentRadioStation == 9) {
+            this.currentRadioStation = 0;
             return;
         }
-        currentRadioStation --;
+        this.currentRadioStation++;
     }
+
 
     public int getVolume() {
         return volume;
     }
 
     public void setVolume(int volume) {
-        if (volume >= maxVolume) {
-            this.volume = maxVolume;
+        if (volume < 0) {
+            return;
         }
-        if (volume <= minVolume) {
-            this.volume = minVolume;
+        if (volume > 10) {
             return;
         }
         this.volume = volume;
-
     }
 
-    public void volumeUp() {
-        if (volume >= maxVolume) {
-            volume = maxVolume;
-            return;
+    public void volumeUpForOne() {
+
+        if (volume == 10) {
+            this.volume = volume;
         }
-        volume ++;
+        if (volume < 10) {
+            this.volume++;
+        }
     }
 
-    public void volumeDown() {
-        if (volume <= minVolume) {
-            volume = minVolume;
-            return;
+    public void volumeDownForOne() {
+        if (volume == 0) {
+            this.volume = volume;
         }
-        volume --;
+        if (volume > 0) {
+            this.volume--;
+        }
     }
+
 }
+
+
